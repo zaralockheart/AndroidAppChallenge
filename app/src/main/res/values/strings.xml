@@ -3,4 +3,13 @@
     <string name="text_email">Email</string>
     <string name="text_password">Password</string>
     <string name="text_signin">Sign In</string>
+    <string name="text_firstname">First name</string>
+    <string name="text_lastname">Last name</string>
+    <string name="text_mobilenumber">Mobile number</string>
+    <string name="text_selectgender">Select gender</string>
+    <string name="text_signup">Sign Up</string>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

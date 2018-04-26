@@ -12,7 +12,7 @@ class HomeActivity : BaseActivity() {
 
         fun newIntent(context: Context): Intent {
             val intent = Intent(context, HomeActivity::class.java)
-
+            // I wonder if I need to pass data here
             return intent
         }
     }

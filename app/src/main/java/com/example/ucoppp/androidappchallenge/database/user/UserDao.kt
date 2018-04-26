@@ -1,6 +1,8 @@
 package com.example.ucoppp.androidappchallenge.database.user
 
 import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import io.reactivex.Flowable
 
@@ -19,4 +21,12 @@ interface UserDao {
      */
     @Query("delete from users")
     fun deleteAllUser()
+
+    /**
+     * Insert a meal into db, if exists, replace
+     *
+     * @param meal - meal to be inserted
+     */
+    @Insert(onConflict = OnConflictStrategy.FAIL)
+    fun insertUser(user: User)
 }

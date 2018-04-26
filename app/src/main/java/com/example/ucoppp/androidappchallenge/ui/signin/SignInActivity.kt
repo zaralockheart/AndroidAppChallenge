@@ -29,15 +29,15 @@ class SignInActivity : BaseActivity(), SignInView {
         startActivity(HomeActivity.newIntent(this))
     }
 
+    override fun onInvalidEmailFormat(error: String?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onInvalidPasswordFormat(error: String?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onEmptyFields() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onInvalidEmailFormat() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onInvalidPasswordFormat() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

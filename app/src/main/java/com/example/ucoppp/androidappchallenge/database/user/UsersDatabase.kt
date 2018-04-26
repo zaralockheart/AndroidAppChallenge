@@ -4,7 +4,9 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import dagger.Module
 
+@Module
 @Database(entities = [(User::class)], version = 1)
 abstract class UsersDatabase : RoomDatabase() {
 
@@ -22,7 +24,7 @@ abstract class UsersDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) : UsersDatabase =
                 Room.databaseBuilder(context.applicationContext,
-                        UsersDatabase::class.java, "Sample.db")
+                        UsersDatabase::class.java, "Users.db")
                         .build()
     }
 
