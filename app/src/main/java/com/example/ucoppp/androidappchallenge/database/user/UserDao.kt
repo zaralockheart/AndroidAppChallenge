@@ -14,7 +14,7 @@ interface UserDao {
      * @return the user from the table with a specific id.
      */
     @Query("select * from Users where email = :email")
-    fun getUserByEmail(email: String): Flowable<User>
+    fun getUserByEmail(email: String): User
 
     /**
      * Just in case if you wanna delete all users

@@ -24,7 +24,7 @@ abstract class UsersDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) : UsersDatabase =
                 Room.databaseBuilder(context.applicationContext,
-                        UsersDatabase::class.java, "Users.db")
+                        UsersDatabase::class.java, "Users")
                         .build()
     }
 

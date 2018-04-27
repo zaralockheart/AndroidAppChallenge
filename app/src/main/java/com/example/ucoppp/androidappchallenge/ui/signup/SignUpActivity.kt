@@ -1,36 +1,48 @@
 package com.example.ucoppp.androidappchallenge.ui.signup
 
-import android.arch.persistence.room.Room
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.example.ucoppp.androidappchallenge.R
 import com.example.ucoppp.androidappchallenge.database.user.User
-import com.example.ucoppp.androidappchallenge.database.user.UsersDatabase
 import com.example.ucoppp.androidappchallenge.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.item_edittext_email.*
-import javax.inject.Inject
+import kotlinx.coroutines.experimental.async
 
 class SignUpActivity : BaseActivity(), SignUpview {
 
-    @Inject lateinit var usersDatabase: UsersDatabase
+    lateinit var signUpPresenter: SignUpPresenter
+
+    companion object {
+
+        fun newIntent(context: Context): Intent {
+            val intent = Intent(context, SignUpActivity::class.java)
+
+            return intent
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        usersDatabase = UsersDatabase.getInstance(this)
+        signUpPresenter = SignUpPresenter(this)
+
+        buttonSignUp.setOnClickListener { signUpPresenter.onSignUpUser() }
     }
 
     override fun onSignUpUser() {
 
-        usersDatabase.userDao().insertUser(User(
-                userID = null,
-                email = editTextEmail.text.toString(),
-                firstName = editTextFirstName.text.toString(),
-                lastName = editTextLastName.text.toString(),
-                mobileNumber = editTextMobileNumber.text.toString(),
-                gender = spinnerGender.selectedItem.toString()
-        ))
+        async {
+            userDatabase.userDao().insertUser(User(
+                    email = editTextEmail.text.toString(),
+                    firstName = editTextFirstName.text.toString(),
+                    lastName = editTextLastName.text.toString(),
+                    mobileNumber = editTextMobileNumber.text.toString(),
+                    gender = spinnerGender.selectedItem.toString()
+            ))
+        }
     }
 
     override fun onEmptyCompulsoryField(error: String?) {

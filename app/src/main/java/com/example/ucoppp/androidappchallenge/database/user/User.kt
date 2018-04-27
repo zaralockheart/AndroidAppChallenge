@@ -11,7 +11,7 @@ import java.util.*
 data class User(
         @PrimaryKey
         @ColumnInfo(name = "user_id")
-        val userID: String? = UUID.randomUUID().toString(),
+        val userID: String = UUID.randomUUID().toString(),
         @ColumnInfo(name = "email")
         val email: String,
         @ColumnInfo(name = "first_name")

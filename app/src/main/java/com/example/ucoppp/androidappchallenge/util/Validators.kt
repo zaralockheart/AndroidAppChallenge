@@ -7,7 +7,7 @@ package com.example.ucoppp.androidappchallenge.util
  * and a
  * minimum 8 characters required”
  */
-fun String.isValidPassword() = Regex("^(?=(.*[\\W]))(?!.*\\s).{8,}").containsMatchIn(this)
+fun String.isValidPassword() = Regex("^(?=(.*[\\W]))(?!.*\\s).{8,}").containsMatchIn(this) && this.isNotEmpty()
 
 /**
  * On invalid email format, login click should show error. “Email is not valid”
@@ -19,7 +19,7 @@ fun String.isValidEmail() = Regex("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
         "(" +
         "\\." +
         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-        ")+").containsMatchIn(this)
+        ")+").containsMatchIn(this) && this.isNotEmpty()
 
 /**
  * Tbh, I am not sure about Malaysian mobile number, so I'm going to put default as min 8 max 10. Feel free to change

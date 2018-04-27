@@ -8,18 +8,21 @@ class SignInPresenter(private val signInView: SignInView) {
 
     fun onUserLogin(email: String, password: String) {
 
-        if (email.isEmpty() && password.isEmpty()){
+        if (email.isBlank() && password.isBlank()) {
             signInView.onEmptyFields()
+            return
         }
 
-        if(!email.isValidEmail()){
+        if (!email.isValidEmail()) {
             signInView.onInvalidEmailFormat()
         }
 
-        if(!password.isValidPassword()){
+        if (!password.isValidPassword()) {
             signInView.onInvalidPasswordFormat()
         }
 
-        signInView.onSignInUser()
+        if (email.isValidEmail() && password.isValidPassword()) {
+            signInView.onSignInUser()
+        }
     }
 }

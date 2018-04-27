@@ -66,6 +66,7 @@
     </android.support.v7.widget.LinearLayoutCompat>
 
     <Button
+        android:id="@+id/buttonSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/text_signup"
