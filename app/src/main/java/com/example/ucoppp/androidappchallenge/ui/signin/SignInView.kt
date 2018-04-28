@@ -4,7 +4,7 @@ interface SignInView : EmailPasswordValidator {
 
     fun onEmptyFields()
 
-    fun onSignInUser()
+    suspend fun onSignInUser()
 
 }
 

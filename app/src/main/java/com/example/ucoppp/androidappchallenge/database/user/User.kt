@@ -7,6 +7,7 @@ import java.util.*
 
 
 // First let's create our table
+// Call it Users
 @Entity(tableName = "Users")
 data class User(
         @PrimaryKey
@@ -14,6 +15,8 @@ data class User(
         val userID: String = UUID.randomUUID().toString(),
         @ColumnInfo(name = "email")
         val email: String,
+        @ColumnInfo(name = "password")
+        val password: String,
         @ColumnInfo(name = "first_name")
         val firstName: String,
         @ColumnInfo(name = "last_name")

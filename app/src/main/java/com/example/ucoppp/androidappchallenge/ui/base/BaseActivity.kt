@@ -8,4 +8,8 @@ abstract class BaseActivity : AppCompatActivity() {
     protected val userDatabase by lazy {
         UsersDatabase.getInstance(this)
     }
+
+    protected val userDao by lazy {
+        userDatabase.userDao()
+    }
 }

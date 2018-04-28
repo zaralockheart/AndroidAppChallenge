@@ -16,6 +16,9 @@ interface UserDao {
     @Query("select * from Users where email = :email")
     fun getUserByEmail(email: String): User
 
+    @Query("select * from Users where user_id = :uuid")
+    fun getUserByUuid(uuid: String): User
+
     /**
      * Just in case if you wanna delete all users
      */

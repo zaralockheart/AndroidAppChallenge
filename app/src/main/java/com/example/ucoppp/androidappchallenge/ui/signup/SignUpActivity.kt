@@ -3,12 +3,15 @@ package com.example.ucoppp.androidappchallenge.ui.signup
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.example.ucoppp.androidappchallenge.R
 import com.example.ucoppp.androidappchallenge.database.user.User
 import com.example.ucoppp.androidappchallenge.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.item_edittext_email.*
+import kotlinx.android.synthetic.main.item_edittext_password.*
 import kotlinx.coroutines.experimental.async
+import kotlin.concurrent.thread
 
 class SignUpActivity : BaseActivity(), SignUpview {
 
@@ -37,11 +40,17 @@ class SignUpActivity : BaseActivity(), SignUpview {
         async {
             userDatabase.userDao().insertUser(User(
                     email = editTextEmail.text.toString(),
+                    password = editTextPassword.text.toString(),
                     firstName = editTextFirstName.text.toString(),
                     lastName = editTextLastName.text.toString(),
                     mobileNumber = editTextMobileNumber.text.toString(),
                     gender = spinnerGender.selectedItem.toString()
             ))
+
+            thread {
+                Toast.makeText(this@SignUpActivity, "Sign Up Success!", Toast.LENGTH_LONG).show()
+                finish()
+            }
         }
     }
 

@@ -6,23 +6,23 @@ import com.example.ucoppp.androidappchallenge.util.isValidPassword
 class SignInPresenter(private val signInView: SignInView) {
 
 
-    fun onUserLogin(email: String, password: String) {
+    suspend fun onUserLogin(email: String, password: String) {
 
         if (email.isBlank() && password.isBlank()) {
             signInView.onEmptyFields()
             return
         }
 
-        if (!email.isValidEmail()) {
-            signInView.onInvalidEmailFormat()
-        }
-
-        if (!password.isValidPassword()) {
-            signInView.onInvalidPasswordFormat()
-        }
-
-        if (email.isValidEmail() && password.isValidPassword()) {
+//        if (!email.isValidEmail()) {
+//            signInView.onInvalidEmailFormat()
+//        }
+//
+//        if (!password.isValidPassword()) {
+//            signInView.onInvalidPasswordFormat()
+//        }
+//
+//        if (email.isValidEmail() && password.isValidPassword()) {
             signInView.onSignInUser()
-        }
+//        }
     }
 }

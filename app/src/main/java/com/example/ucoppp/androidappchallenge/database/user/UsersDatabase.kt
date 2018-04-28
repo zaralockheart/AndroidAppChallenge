@@ -7,7 +7,7 @@ import android.content.Context
 import dagger.Module
 
 @Module
-@Database(entities = [(User::class)], version = 1)
+@Database(entities = [(User::class)], version = 2)
 abstract class UsersDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
@@ -25,6 +25,7 @@ abstract class UsersDatabase : RoomDatabase() {
         private fun buildDatabase(context: Context) : UsersDatabase =
                 Room.databaseBuilder(context.applicationContext,
                         UsersDatabase::class.java, "Users")
+                        .fallbackToDestructiveMigration()
                         .build()
     }
 
