@@ -7,6 +7,7 @@ import com.example.ucoppp.androidappchallenge.R
 import com.example.ucoppp.androidappchallenge.database.user.User
 import com.example.ucoppp.androidappchallenge.database.user.UsersDatabase
 import com.example.ucoppp.androidappchallenge.ui.base.BaseActivity
+import com.example.ucoppp.androidappchallenge.ui.imagedisplayer.ImagesActivity
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_home.*
@@ -64,6 +65,6 @@ class HomeActivity : BaseActivity(), HomeView {
     }
 
     override fun onClickImages() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        startActivity(ImagesActivity.newIntent(this@HomeActivity))
     }
 }

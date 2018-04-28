@@ -19,6 +19,9 @@ interface UserDao {
     @Query("select * from Users where user_id = :uuid")
     fun getUserByUuid(uuid: String): User
 
+    @Query("select * from Users")
+    fun getAllUsers(): List<User>
+
     /**
      * Just in case if you wanna delete all users
      */
@@ -26,9 +29,8 @@ interface UserDao {
     fun deleteAllUser()
 
     /**
-     * Insert a meal into db, if exists, replace
      *
-     * @param meal - meal to be inserted
+     * @param user - meal to be inserted
      */
     @Insert(onConflict = OnConflictStrategy.FAIL)
     fun insertUser(user: User)

@@ -7,7 +7,7 @@ import android.content.Context
 import dagger.Module
 
 @Module
-@Database(entities = [(User::class)], version = 2)
+@Database(entities = [(User::class)], version = 1)
 abstract class UsersDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao

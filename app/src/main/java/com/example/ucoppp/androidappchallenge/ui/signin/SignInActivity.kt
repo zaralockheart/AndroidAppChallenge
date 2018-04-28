@@ -48,7 +48,9 @@ class SignInActivity : BaseActivity(), SignInView {
                     if (finalUser?.password == editTextPassword.text.toString()) {
 
                         runOnUi { navigateToHome(finalUser.userID) }
+
                     } else {
+
                         runOnUi { this.showToast("Not sign in") }
                     }
                 }
