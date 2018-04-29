@@ -20,7 +20,7 @@ interface SignUpview : EmailPasswordValidator, ClearDataView {
 
     // On no gender selected, signup button click should show an error.
 
-    fun onNoGenderSelected()
+    fun onNoGenderSelected(error: String? = "Please select gender")
 
     // If nothing happens, lets sign the user up!
 

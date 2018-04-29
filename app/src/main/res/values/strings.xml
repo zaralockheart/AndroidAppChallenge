@@ -16,12 +16,18 @@
     <string name="text_change_mobile_success">Success change Mobile Number</string>
     <string name="text_field_empty">All fields are required</string>
     <string name="text_data_empty">Please complete the form</string>
+    <string name="text_gender_empty">Please select gender</string>
     <string name="text_invalid_email">Email is not valid</string>
     <string name="text_invalid_password">Password should contain one special character and a minimum 8 characters required</string>
     <string name="text_invalid_mobile">Invalid mobile number</string>
     <string name="text_fail_signin">Not sign in</string>
     <string name="text_change">Change</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="text_signin_success">Sign Up Success!</string>
+    <string name="text_email_exist">Email already exists</string>
     <string-array name="gender">
+        <item>Select Gender</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>

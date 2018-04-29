@@ -18,10 +18,10 @@ class SignUpPresenter(private val signUpView: SignUpview, appCompatActivity: App
         Observable.just(user.email)
                 .subscribe({
                     if (it.isEmpty())
-                        throw EmptyPrimaryFieldsException(appCompatActivity.getString(R.string.text_data_empty))
+                        throw EmptyPrimaryFieldsException(appCompatActivity!!.getString(R.string.text_data_empty))
 
                     if (!it.isValidEmail())
-                        throw Exception(appCompatActivity.getString(R.string.text_invalid_email))
+                        throw Exception(appCompatActivity?.getString(R.string.text_invalid_email))
                 }, { error ->
                     if (error is EmptyPrimaryFieldsException) {
                         signUpView.onEmptyCompulsoryField(error = error.localizedMessage)
@@ -33,10 +33,10 @@ class SignUpPresenter(private val signUpView: SignUpview, appCompatActivity: App
         Observable.just(user.password)
                 .subscribe({
                     if (it.isEmpty()) {
-                        throw EmptyPrimaryFieldsException(appCompatActivity.getString(R.string.text_data_empty))
+                        throw EmptyPrimaryFieldsException(appCompatActivity!!.getString(R.string.text_data_empty))
                     }
 
-                    if (!it.isValidPassword()) throw Exception(appCompatActivity.getString(R.string.text_invalid_password))
+                    if (!it.isValidPassword()) throw Exception(appCompatActivity?.getString(R.string.text_invalid_password))
                 }, { error ->
 
                     if (error is EmptyPrimaryFieldsException) {
@@ -49,10 +49,10 @@ class SignUpPresenter(private val signUpView: SignUpview, appCompatActivity: App
         Observable.just(user.mobileNumber)
                 .subscribe({
                     if (it.isEmpty()) {
-                        throw EmptyPrimaryFieldsException(appCompatActivity.getString(R.string.text_data_empty))
+                        throw EmptyPrimaryFieldsException(appCompatActivity!!.getString(R.string.text_data_empty))
                     }
 
-                    if (!it.isValidMobileNumber()) throw Exception(appCompatActivity.getString(R.string.text_invalid_mobile))
+                    if (!it.isValidMobileNumber()) throw Exception(appCompatActivity?.getString(R.string.text_invalid_mobile))
                 }, { error ->
 
                     if (error is EmptyPrimaryFieldsException) {
@@ -65,7 +65,7 @@ class SignUpPresenter(private val signUpView: SignUpview, appCompatActivity: App
         Observable.just(user.gender)
                 .doOnNext { t ->
                     if (t.isEmpty()) {
-                        throw EmptyPrimaryFieldsException(appCompatActivity.getString(R.string.text_data_empty))
+                        throw EmptyPrimaryFieldsException(appCompatActivity!!.getString(R.string.text_data_empty))
                     }
                 }
                 .subscribe({

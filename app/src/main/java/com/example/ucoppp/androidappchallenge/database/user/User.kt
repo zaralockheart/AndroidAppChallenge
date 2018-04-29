@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Index
 import android.arch.persistence.room.PrimaryKey
+import android.support.annotation.NonNull
 import java.util.*
 
 
@@ -15,16 +16,20 @@ data class User(
         @PrimaryKey
         @ColumnInfo(name = "user_id")
         val userID: String = UUID.randomUUID().toString(),
+        @NonNull
         @ColumnInfo(name = "email")
         val email: String,
+        @NonNull
         @ColumnInfo(name = "password")
         val password: String,
         @ColumnInfo(name = "first_name")
         val firstName: String,
         @ColumnInfo(name = "last_name")
         val lastName: String,
+        @NonNull
         @ColumnInfo(name = "mobile_number")
         val mobileNumber: String,
+        @NonNull
         @ColumnInfo(name = "gender")
         val gender: String
 )

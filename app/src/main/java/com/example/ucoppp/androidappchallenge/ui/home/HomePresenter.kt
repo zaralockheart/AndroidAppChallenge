@@ -15,24 +15,24 @@ import com.example.ucoppp.androidappchallenge.util.isValidMobileNumber
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
-class HomePresenter(private val homeView: HomeView, appCompatActivity: AppCompatActivity) : BasePresenter(appCompatActivity) {
+class HomePresenter(private val homeView: HomeView?, appCompatActivity: AppCompatActivity?) : BasePresenter(appCompatActivity) {
 
     fun onClickEditMobile(userDatabase: UsersDatabase, userDao: UserDao, userId: String) {
         val dialog = AlertDialog.Builder(appCompatActivity)
         val viewRoot: ViewGroup? = null
-        val view: View = appCompatActivity.layoutInflater.inflate(R.layout.dialog_edit_mobile, viewRoot)
+        val view: View = appCompatActivity?.layoutInflater!!.inflate(R.layout.dialog_edit_mobile, viewRoot)
         val mobileNumberEditText = view.findViewById<EditText>(R.id.editTextMobileNumber)
         dialog.let {
 
-            setUiMobileDialog(it, appCompatActivity.getString(R.string.text_change_mobile), view)
+            setUiMobileDialog(it, appCompatActivity!!.getString(R.string.text_change_mobile), view)
 
-            it.setPositiveButton(appCompatActivity.getString(R.string.text_change), { mDialog, _ ->
+            it.setPositiveButton(appCompatActivity?.getString(R.string.text_change), { mDialog, _ ->
                 if (mobileNumberEditText.text.toString().isValidMobileNumber()) {
 
                     updateMobileNumber(userDao, userId, mobileNumberEditText)
 
                 } else {
-                    homeView.onUpdateMobileFail(appCompatActivity.getString(R.string.text_invalid_mobile))
+                    homeView?.onUpdateMobileFail(appCompatActivity?.getString(R.string.text_invalid_mobile))
                 }
 
                 loadData(userDatabase = userDatabase, userId = userId)
@@ -45,12 +45,12 @@ class HomePresenter(private val homeView: HomeView, appCompatActivity: AppCompat
     }
 
     fun onClickImages() {
-        appCompatActivity.startActivity(ImagesActivity.newIntent(appCompatActivity))
+        appCompatActivity?.startActivity(ImagesActivity.newIntent(appCompatActivity!!))
     }
 
     fun onClickSignOut(sharedPreferences: SharedPreferences) {
         sharedPreferences.edit().clear().apply()
-        homeView.onSignOut()
+        homeView?.onSignOut()
     }
 
     fun loadData(userDatabase: UsersDatabase, userId: String) {
@@ -58,7 +58,7 @@ class HomePresenter(private val homeView: HomeView, appCompatActivity: AppCompat
                 .subscribeOn(Schedulers.io())
                 .subscribe { db: UsersDatabase? ->
                     val user = db?.userDao()?.getUserByUuid(userId)
-                    homeView.updateDataToi(user)
+                    homeView?.updateDataToi(user)
                 }
     }
 
@@ -68,9 +68,9 @@ class HomePresenter(private val homeView: HomeView, appCompatActivity: AppCompat
         }).subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribe({
-                    homeView.onUpdateMobileSuccess()
+                    homeView?.onUpdateMobileSuccess()
                 }, { _ ->
-                    homeView.onUpdateMobileFail(appCompatActivity.getString(R.string.text_change_mobile_fail))
+                    homeView?.onUpdateMobileFail(appCompatActivity?.getString(R.string.text_change_mobile_fail))
                 })
     }
 

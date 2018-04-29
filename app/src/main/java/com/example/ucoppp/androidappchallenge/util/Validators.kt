@@ -1,5 +1,8 @@
 package com.example.ucoppp.androidappchallenge.util
 
+import android.content.Context
+import com.example.ucoppp.androidappchallenge.R
+
 /**
  * On invalid password format, login click should show error.
  * “Password should contain
@@ -25,3 +28,5 @@ fun String.isValidEmail() = Regex("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
  * Tbh, I am not sure about Malaysian mobile number, so I'm going to put default as min 8 max 12. Feel free to change
  */
 fun String.isValidMobileNumber(min:Int = 8, max: Int = 12) = Regex("^[0-9]{$min,$max}$").containsMatchIn(this)
+
+fun String.isValidGender(context: Context) = this == context.getString(R.string.male) || this == context.getString(R.string.female)

@@ -67,6 +67,7 @@ class SignUpActivity : BaseActivity(), SignUpview {
         textInputLayoutEmail.error = ""
         textInputLayoutPassword.error = ""
         textInputLayoutMobileNumber.error = ""
+        textInputLayoutGender.error = ""
     }
 
     override fun onEmptyCompulsoryField(error: String?) {
@@ -77,8 +78,8 @@ class SignUpActivity : BaseActivity(), SignUpview {
         textInputLayoutMobileNumber.error = error
     }
 
-    override fun onNoGenderSelected() {
-        Toast.makeText(this@SignUpActivity, "Please select gender", Toast.LENGTH_LONG).show()
+    override fun onNoGenderSelected(error: String?) {
+        textInputLayoutGender.error = error
     }
 
     override fun onInvalidEmailFormat(error: String?) {
@@ -90,11 +91,11 @@ class SignUpActivity : BaseActivity(), SignUpview {
     }
 
     private fun signUp() {
-        Toast.makeText(this@SignUpActivity, "Sign Up Success!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@SignUpActivity, R.string.text_signin_success, Toast.LENGTH_LONG).show()
         finish()
     }
 
     private fun signUpFail() {
-        Toast.makeText(this@SignUpActivity, "Email already exist in the system", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@SignUpActivity, R.string.text_email_exist, Toast.LENGTH_LONG).show()
     }
 }

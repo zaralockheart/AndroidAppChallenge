@@ -7,7 +7,7 @@ import com.example.ucoppp.androidappchallenge.util.isValidEmail
 import com.example.ucoppp.androidappchallenge.util.isValidPassword
 import io.reactivex.Observable
 
-class SignInPresenter(private val signInView: SignInView, appCompatActivity: AppCompatActivity) : BasePresenter(appCompatActivity) {
+class SignInPresenter(private val signInView: SignInView?, appCompatActivity: AppCompatActivity?) : BasePresenter(appCompatActivity) {
 
 
     fun onUserLogin(email: String, password: String) {
@@ -15,24 +15,24 @@ class SignInPresenter(private val signInView: SignInView, appCompatActivity: App
         var failed = false
         Observable.just(email)
                 .subscribe({ t ->
-                    if (t.isEmpty()) throw Exception(appCompatActivity.getString(R.string.text_field_empty))
-                    if (!t.isValidEmail()) throw Exception(appCompatActivity.getString(R.string.text_invalid_email))
+                    if (t.isEmpty()) throw Exception(appCompatActivity?.getString(R.string.text_field_empty))
+                    if (!t.isValidEmail()) throw Exception(appCompatActivity?.getString(R.string.text_invalid_email))
                 }, { error ->
-                    signInView.onInvalidEmailFormat(error = error.localizedMessage)
+                    signInView?.onInvalidEmailFormat(error = error.localizedMessage)
                     failed = true
                 })
 
         Observable.just(password)
                 .subscribe({ t ->
-                    if (t.isEmpty()) throw Exception(appCompatActivity.getString(R.string.text_field_empty))
-                    if (!t.isValidPassword()) throw Exception(appCompatActivity.getString(R.string.text_invalid_password))
+                    if (t.isEmpty()) throw Exception(appCompatActivity?.getString(R.string.text_field_empty))
+                    if (!t.isValidPassword()) throw Exception(appCompatActivity?.getString(R.string.text_invalid_password))
                 }, { error ->
-                    signInView.onInvalidPasswordFormat(error = error.localizedMessage)
+                    signInView?.onInvalidPasswordFormat(error = error.localizedMessage)
                     failed = true
                 })
 
         if (!failed) {
-            signInView.onSignInUser()
+            signInView?.onSignInUser()
         }
     }
 }
