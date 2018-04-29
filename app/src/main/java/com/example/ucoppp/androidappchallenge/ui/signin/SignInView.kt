@@ -2,9 +2,7 @@ package com.example.ucoppp.androidappchallenge.ui.signin
 
 interface SignInView : EmailPasswordValidator {
 
-    fun onEmptyFields()
-
-    suspend fun onSignInUser()
+    fun onSignInUser()
 
 }
 

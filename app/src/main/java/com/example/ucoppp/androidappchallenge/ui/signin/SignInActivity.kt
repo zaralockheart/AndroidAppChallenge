@@ -34,26 +34,30 @@ class SignInActivity : BaseActivity(), SignInView {
 
         setContentView(R.layout.activity_sign_in)
 
-        signInPresenter = SignInPresenter(this)
+        signInPresenter = SignInPresenter(this, this)
 
         setUpUiInteractions()
 
 
     }
 
-    override suspend fun onSignInUser() {
+    override fun onSignInUser() {
 
         Observable.just(userDatabase)
                 .subscribeOn(Schedulers.io())
                 .subscribe { db: UsersDatabase? ->
                     val finalUser = db?.userDao()?.getUserByEmail(editTextEmail.text.toString())
-                    if (finalUser?.password == editTextPassword.text.toString()) {
 
-                        runOnUi { navigateToHome(finalUser.userID) }
+                    runOnUi {
 
-                    } else {
+                        if (finalUser?.password == editTextPassword.text.toString()) {
 
-                        runOnUi { this.showToast("Not sign in") }
+                            navigateToHome(finalUser.userID)
+
+                        } else {
+
+                            this.showToast("Not sign in")
+                        }
                     }
                 }
     }
@@ -64,11 +68,6 @@ class SignInActivity : BaseActivity(), SignInView {
 
     override fun onInvalidPasswordFormat(error: String?) {
         textInputLayoutPassword.error = error
-    }
-
-    override fun onEmptyFields() {
-        textInputLayoutEmail.error = "Please fill in Email"
-        textInputLayoutPassword.error = "Please fill in Password"
     }
 
     private fun showToast(text: String) {

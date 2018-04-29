@@ -21,4 +21,9 @@ class ExampleInstrumentedTest {
         val appContext = InstrumentationRegistry.getTargetContext()
         assertEquals("com.example.ucoppp.androidappchallenge", appContext.packageName)
     }
+
+    @Test
+    fun testSignInSucess() {
+
+    }
 }

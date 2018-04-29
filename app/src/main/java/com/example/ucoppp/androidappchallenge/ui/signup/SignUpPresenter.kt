@@ -1,12 +1,10 @@
 package com.example.ucoppp.androidappchallenge.ui.signup
 
-import dagger.Module
-import dagger.Provides
-import javax.inject.Inject
+import com.example.ucoppp.androidappchallenge.database.user.User
 
-class SignUpPresenter (private val signUpview: SignUpview) {
+class SignUpPresenter(private val signUpview: SignUpview) {
 
-    fun onSignUpUser() {
+    fun onSignUpUser(user: User) {
         signUpview.onSignUpUser()
     }
 
