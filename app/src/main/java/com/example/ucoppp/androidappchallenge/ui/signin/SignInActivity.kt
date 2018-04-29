@@ -79,6 +79,7 @@ class SignInActivity : BaseActivity(), SignInView {
 
     private fun navigateToHome(userid: String) {
         startActivity(HomeActivity.newIntent(this, userId = userid))
+        finish()
     }
 
     private fun goToHomeIfUserSignedIn() {

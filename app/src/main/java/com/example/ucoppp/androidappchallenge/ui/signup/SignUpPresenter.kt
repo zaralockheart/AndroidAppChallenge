@@ -23,6 +23,7 @@ class SignUpPresenter(private val signUpView: SignUpview, appCompatActivity: App
                     if (!it.isValidEmail())
                         throw Exception(appCompatActivity?.getString(R.string.text_invalid_email))
                 }, { error ->
+                    failed = true
                     if (error is EmptyPrimaryFieldsException) {
                         signUpView.onEmptyCompulsoryField(error = error.localizedMessage)
                     } else {
@@ -38,7 +39,7 @@ class SignUpPresenter(private val signUpView: SignUpview, appCompatActivity: App
 
                     if (!it.isValidPassword()) throw Exception(appCompatActivity?.getString(R.string.text_invalid_password))
                 }, { error ->
-
+                    failed = true
                     if (error is EmptyPrimaryFieldsException) {
                         signUpView.onEmptyCompulsoryField(error = error.localizedMessage)
                     } else {
@@ -54,7 +55,7 @@ class SignUpPresenter(private val signUpView: SignUpview, appCompatActivity: App
 
                     if (!it.isValidMobileNumber()) throw Exception(appCompatActivity?.getString(R.string.text_invalid_mobile))
                 }, { error ->
-
+                    failed = true
                     if (error is EmptyPrimaryFieldsException) {
                         signUpView.onEmptyCompulsoryField(error = error.localizedMessage)
                     } else {
@@ -63,19 +64,13 @@ class SignUpPresenter(private val signUpView: SignUpview, appCompatActivity: App
                 })
 
         Observable.just(user.gender)
-                .doOnNext { t ->
-                    if (t.isEmpty()) {
-                        throw EmptyPrimaryFieldsException(appCompatActivity!!.getString(R.string.text_data_empty))
-                    }
-                }
                 .subscribe({
-
-                }, { error ->
-
-                    if (error is EmptyPrimaryFieldsException) {
-                        signUpView.onEmptyCompulsoryField(error = error.localizedMessage)
+                    if (!it.isValidGender(appCompatActivity!!)) {
+                        throw Exception(appCompatActivity!!.getString(R.string.text_data_empty))
                     }
+                }, { error ->
                     failed = true
+                    signUpView.onNoGenderSelected(error = error.localizedMessage)
                 })
 
 
