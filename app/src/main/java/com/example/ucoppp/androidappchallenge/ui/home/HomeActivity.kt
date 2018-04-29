@@ -2,18 +2,21 @@ package com.example.ucoppp.androidappchallenge.ui.home
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import com.example.ucoppp.androidappchallenge.R
 import com.example.ucoppp.androidappchallenge.database.user.User
 import com.example.ucoppp.androidappchallenge.database.user.UsersDatabase
 import com.example.ucoppp.androidappchallenge.ui.base.BaseActivity
 import com.example.ucoppp.androidappchallenge.ui.imagedisplayer.ImagesActivity
+import com.example.ucoppp.androidappchallenge.util.APPLICATION
+import com.example.ucoppp.androidappchallenge.util.APP_SIGN_IN
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_home.*
+import javax.inject.Inject
 
 class HomeActivity : BaseActivity(), HomeView {
-
 
     private lateinit var homePresenter: HomePresenter
 
@@ -24,6 +27,7 @@ class HomeActivity : BaseActivity(), HomeView {
         fun newIntent(context: Context, userId: String): Intent {
             val intent = Intent(context, HomeActivity::class.java)
             intent.putExtra(EXTRA_USER_ID, userId)
+            context.getSharedPreferences(APPLICATION, Context.MODE_PRIVATE).edit().putString(APP_SIGN_IN, userId).apply()
             return intent
         }
     }
