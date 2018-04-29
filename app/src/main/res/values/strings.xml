@@ -18,6 +18,7 @@
     <string name="text_invalid_email">Invalid email</string>
     <string name="text_invalid_password">Invalid password</string>
     <string name="text_invalid_mobile">Invalid mobile number</string>
+    <string name="text_fail_signin">Not sign in</string>
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>

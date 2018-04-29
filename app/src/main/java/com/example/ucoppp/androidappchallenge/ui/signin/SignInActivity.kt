@@ -56,7 +56,7 @@ class SignInActivity : BaseActivity(), SignInView {
 
                         } else {
 
-                            this.showToast("Not sign in")
+                            this.showToast(text = R.string.text_fail_signin)
                         }
                     }
                 }
@@ -70,7 +70,7 @@ class SignInActivity : BaseActivity(), SignInView {
         textInputLayoutPassword.error = error
     }
 
-    private fun showToast(text: String) {
+    private fun showToast(text: Int) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 
