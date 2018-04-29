@@ -30,6 +30,6 @@ class ExampleUnitTest {
 
     @Test
     fun validateMobileNumber() {
-        assertEquals(true, "+601111111".isValidMobileNumber(min = 8, max = 9))
+        assertEquals(true, "1234567890".isValidMobileNumber())
     }
 }

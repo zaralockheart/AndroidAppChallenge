@@ -65,14 +65,10 @@ class SignUpActivity : BaseActivity(), SignUpview {
                 }, { _ -> runOnUi(this::signUpFail) })
     }
 
-
-    private fun signUp() {
-        Toast.makeText(this@SignUpActivity, "Sign Up Success!", Toast.LENGTH_LONG).show()
-        finish()
-    }
-
-    private fun signUpFail() {
-        Toast.makeText(this@SignUpActivity, "Email already exist in the system", Toast.LENGTH_LONG).show()
+    override fun onClearError() {
+        textInputLayoutEmail.error =""
+        textInputLayoutPassword.error =""
+        textInputLayoutMobileNumber.error =""
     }
 
     override fun onEmptyCompulsoryField(error: String?) {
@@ -93,5 +89,14 @@ class SignUpActivity : BaseActivity(), SignUpview {
 
     override fun onInvalidPasswordFormat(error: String?) {
         textInputLayoutPassword.error = error
+    }
+
+    private fun signUp() {
+        Toast.makeText(this@SignUpActivity, "Sign Up Success!", Toast.LENGTH_LONG).show()
+        finish()
+    }
+
+    private fun signUpFail() {
+        Toast.makeText(this@SignUpActivity, "Email already exist in the system", Toast.LENGTH_LONG).show()
     }
 }

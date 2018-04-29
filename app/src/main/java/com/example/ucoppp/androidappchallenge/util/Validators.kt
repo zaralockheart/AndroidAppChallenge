@@ -24,4 +24,4 @@ fun String.isValidEmail() = Regex("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
 /**
  * Tbh, I am not sure about Malaysian mobile number, so I'm going to put default as min 8 max 12. Feel free to change
  */
-fun String.isValidMobileNumber(min:Int = 8, max: Int = 12) = Regex("^\\+[0-9]{$min,$max}$").containsMatchIn(this)
+fun String.isValidMobileNumber(min:Int = 8, max: Int = 12) = Regex("^[0-9]{$min,$max}$").containsMatchIn(this)

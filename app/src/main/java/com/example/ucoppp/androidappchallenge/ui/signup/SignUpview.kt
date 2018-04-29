@@ -4,6 +4,10 @@ import com.example.ucoppp.androidappchallenge.ui.signin.EmailPasswordValidator
 
 interface SignUpview : EmailPasswordValidator {
 
+    // I think I need to clear all the errors first when user re-enter data
+
+    fun onClearError()
+
     // Email, password, gender and mobile number are compulsory.
     // On empty compulsory fields, signup button click should show “Please complete
     // the form” message.

@@ -11,8 +11,9 @@ class SignUpPresenter(private val signUpView: SignUpview, appCompatActivity: App
 
     fun onSignUpUser(user: User) {
 
-        var failed = true
+        var failed = false
 
+        signUpView.onClearError()
 
         Observable.just(user.email)
                 .subscribe({
@@ -67,7 +68,6 @@ class SignUpPresenter(private val signUpView: SignUpview, appCompatActivity: App
                         throw EmptyPrimaryFieldsException(appCompatActivity.getString(R.string.text_data_empty))
                     }
                 }
-                .doAfterNext { t -> if (!t.isValidEmail()) throw Exception(appCompatActivity.getString(R.string.text_invalid_email)) }
                 .subscribe({
 
                 }, { error ->
