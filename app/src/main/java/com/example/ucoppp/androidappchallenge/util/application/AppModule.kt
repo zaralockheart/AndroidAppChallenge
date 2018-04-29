@@ -1,6 +1,7 @@
 package com.example.ucoppp.androidappchallenge.util.application
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.example.ucoppp.androidappchallenge.util.APPLICATION
 import dagger.Module
 import dagger.Provides
@@ -15,5 +16,5 @@ class AppModule (private val appChallengeApplication: AndroidAppChallengeApplica
 
     @Provides
     @Singleton
-    fun provideSharedPreference(context: Context) = context.getSharedPreferences(APPLICATION, Context.MODE_PRIVATE)
+    fun provideSharedPreference(context: Context): SharedPreferences = context.getSharedPreferences(APPLICATION, Context.MODE_PRIVATE)
 }

@@ -10,6 +10,7 @@
     <string name="text_signup">Sign Up</string>
     <string name="text_edit_mobile_number">Edit Mobile Number</string>
     <string name="text_open_images">Open Images</string>
+    <string name="text_sign_out">Sign Out</string>
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>

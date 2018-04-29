@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.example.ucoppp.androidappchallenge.R
 import com.example.ucoppp.androidappchallenge.database.user.User
 import com.example.ucoppp.androidappchallenge.database.user.UsersDatabase
@@ -43,6 +45,43 @@ class HomeActivity : BaseActivity(), HomeView {
         handleAllClicks()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+
+        inflater.inflate(R.menu.sign_in_menu, menu)
+
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+
+            R.id.buttonSignOut -> signUserOut()
+
+        }
+        return true
+    }
+
+    override fun onClickEditMobile() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onClickImages() {
+        startActivity(ImagesActivity.newIntent(this@HomeActivity))
+    }
+
+    private fun signUserOut() {
+        sharedPreferences.edit().clear().apply()
+        restartApp()
+    }
+
+    private fun restartApp() {
+        val intent = baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+    }
+
     private fun handleAllClicks() {
         buttonOpenImages.setOnClickListener { homePresenter.onClickImages() }
         buttonEditMobile.setOnClickListener { homePresenter.onClickEditMobile() }
@@ -62,13 +101,5 @@ class HomeActivity : BaseActivity(), HomeView {
         textFirstName.text = user?.firstName
         textLastName.text = user?.lastName
         textMobileNumber.text = user?.mobileNumber
-    }
-
-    override fun onClickEditMobile() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onClickImages() {
-        startActivity(ImagesActivity.newIntent(this@HomeActivity))
     }
 }
