@@ -4,8 +4,12 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.example.ucoppp.androidappchallenge.R
+import com.example.ucoppp.androidappchallenge.R.id.imageView
 import com.example.ucoppp.androidappchallenge.databinding.ItemImageBinding
 import com.example.ucoppp.androidappchallenge.model.ImagesModel
 
@@ -25,14 +29,16 @@ class ImagesRecyclerViewAdapter(private val context: Context) : RecyclerView.Ada
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
-        val binding = DataBindingUtil.inflate<ItemImageBinding>(
-                LayoutInflater.from(context),
-                R.layout.item_image,
-                parent,
-                false
-        )
+//        val binding = DataBindingUtil.inflate<ItemImageBinding>(
+//                LayoutInflater.from(context),
+//                R.layout.item_image,
+//                parent,
+//                false
+//        )
+        val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_image, parent, false)
 
-        return CustomViewHolder(binding)
+        return CustomViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
@@ -44,9 +50,13 @@ class ImagesRecyclerViewAdapter(private val context: Context) : RecyclerView.Ada
     }
 }
 
-class CustomViewHolder(var binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
+class CustomViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(ImagesModel: ImagesModel) {
-        binding.image = ImagesModel
+    fun bind(imageModel: ImagesModel) {
+//        binding.image = ImagesModel
+        val imageView = view.findViewById<ImageView>(imageView)
+        Glide.with(view)
+                .load(imageModel.imageUrl)
+                .into(imageView)
     }
 }
