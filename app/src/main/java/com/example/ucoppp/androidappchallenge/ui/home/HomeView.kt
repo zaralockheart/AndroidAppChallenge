@@ -1,8 +1,14 @@
 package com.example.ucoppp.androidappchallenge.ui.home
 
+import com.example.ucoppp.androidappchallenge.database.user.User
+
 interface HomeView {
 
-    fun onClickEditMobile()
+    fun onSignOut()
 
-    fun onClickImages()
+    fun updateDataToi(user: User?)
+
+    fun onUpdateMobileSuccess()
+
+    fun onUpdateMobileFail(text: String?)
 }

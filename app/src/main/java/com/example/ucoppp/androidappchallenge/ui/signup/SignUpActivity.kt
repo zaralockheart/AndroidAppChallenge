@@ -13,6 +13,7 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.item_edittext_email.*
+import kotlinx.android.synthetic.main.item_edittext_mobile.*
 import kotlinx.android.synthetic.main.item_edittext_password.*
 
 class SignUpActivity : BaseActivity(), SignUpview {

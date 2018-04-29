@@ -2,25 +2,25 @@ package com.example.ucoppp.androidappchallenge.ui.home
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.ucoppp.androidappchallenge.R
 import com.example.ucoppp.androidappchallenge.database.user.User
-import com.example.ucoppp.androidappchallenge.database.user.UsersDatabase
 import com.example.ucoppp.androidappchallenge.ui.base.BaseActivity
-import com.example.ucoppp.androidappchallenge.ui.imagedisplayer.ImagesActivity
 import com.example.ucoppp.androidappchallenge.util.APPLICATION
 import com.example.ucoppp.androidappchallenge.util.APP_SIGN_IN
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
+import com.example.ucoppp.androidappchallenge.util.runOnUi
 import kotlinx.android.synthetic.main.activity_home.*
-import javax.inject.Inject
 
 class HomeActivity : BaseActivity(), HomeView {
 
     private lateinit var homePresenter: HomePresenter
+
+    private val userId by lazy {
+        intent.getStringExtra(EXTRA_USER_ID)
+    }
 
     companion object {
 
@@ -38,11 +38,11 @@ class HomeActivity : BaseActivity(), HomeView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        loadDatabase()
+        homePresenter = HomePresenter(this, this)
 
-        homePresenter = HomePresenter(this)
+        homePresenter.loadData(userDatabase, intent.getStringExtra(HomeActivity.EXTRA_USER_ID))
 
-        handleAllClicks()
+        handleAllClickEvents()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -50,56 +50,49 @@ class HomeActivity : BaseActivity(), HomeView {
 
         inflater.inflate(R.menu.sign_in_menu, menu)
 
-
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
+        when (item?.itemId) {
 
-            R.id.buttonSignOut -> signUserOut()
+            R.id.buttonSignOut -> homePresenter.onClickSignOut(sharedPreferences)
 
         }
         return true
     }
 
-    override fun onClickEditMobile() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onUpdateMobileSuccess() {
+        runOnUi {
+            Toast.makeText(this, getString(R.string.text_change_mobile_success), Toast.LENGTH_LONG).show()
+        }
     }
 
-    override fun onClickImages() {
-        startActivity(ImagesActivity.newIntent(this@HomeActivity))
+    override fun onUpdateMobileFail(text: String?) {
+        runOnUi {
+            Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+        }
     }
 
-    private fun signUserOut() {
-        sharedPreferences.edit().clear().apply()
-        restartApp()
-    }
+    override fun onSignOut() {
+        val intent = baseContext
+                .packageManager
+                .getLaunchIntentForPackage(baseContext.packageName)
 
-    private fun restartApp() {
-        val intent = baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
 
-    private fun handleAllClicks() {
+    override fun updateDataToi(user: User?) {
+        runOnUi {
+            textFirstName.text = user?.firstName
+            textLastName.text = user?.lastName
+            textMobileNumber.text = user?.mobileNumber
+        }
+    }
+
+    private fun handleAllClickEvents() {
         buttonOpenImages.setOnClickListener { homePresenter.onClickImages() }
-        buttonEditMobile.setOnClickListener { homePresenter.onClickEditMobile() }
-    }
-
-    private fun loadDatabase() {
-        Observable.just(userDatabase)
-                .subscribeOn(Schedulers.io())
-                .subscribe { db: UsersDatabase? ->
-                    val user = db?.userDao()?.getUserByUuid(intent.getStringExtra(EXTRA_USER_ID))
-
-                    setDataToUi(user)
-                }
-    }
-
-    private fun setDataToUi(user: User?) {
-        textFirstName.text = user?.firstName
-        textLastName.text = user?.lastName
-        textMobileNumber.text = user?.mobileNumber
+        buttonEditMobile.setOnClickListener { homePresenter.onClickEditMobile(userDatabase, userDao, userId) }
     }
 }

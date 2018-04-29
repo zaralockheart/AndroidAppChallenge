@@ -11,6 +11,9 @@
     <string name="text_edit_mobile_number">Edit Mobile Number</string>
     <string name="text_open_images">Open Images</string>
     <string name="text_sign_out">Sign Out</string>
+    <string name="text_change_mobile">Change Mobile Number</string>
+    <string name="text_change_mobile_fail">Failed to change Mobile Number</string>
+    <string name="text_change_mobile_success">Success change Mobile Number</string>
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>

@@ -5,5 +5,6 @@
     <item
         android:id="@+id/buttonSignOut"
         android:title="@string/text_sign_out"
+        android:icon="@drawable/ic_exit_to_app_white"
         app:showAsAction="always"/>
 </menu>

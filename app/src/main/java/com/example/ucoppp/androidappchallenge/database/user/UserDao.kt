@@ -19,6 +19,9 @@ interface UserDao {
     @Query("select * from Users where user_id = :uuid")
     fun getUserByUuid(uuid: String): User
 
+    @Query(value = "update Users set mobile_number = :mobileNumber where user_id = :userId")
+    fun updateMobileNumber(userId: String, mobileNumber: String)
+
     @Query("select * from Users")
     fun getAllUsers(): List<User>
 
