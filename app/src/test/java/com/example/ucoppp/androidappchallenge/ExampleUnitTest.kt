@@ -1,7 +1,7 @@
 package com.example.ucoppp.androidappchallenge
 
 import com.example.ucoppp.androidappchallenge.util.isValidEmail
-import com.example.ucoppp.androidappchallenge.util.validateMobileNumber
+import com.example.ucoppp.androidappchallenge.util.isValidMobileNumber
 import com.example.ucoppp.androidappchallenge.util.isValidPassword
 import org.junit.Test
 
@@ -30,6 +30,6 @@ class ExampleUnitTest {
 
     @Test
     fun validateMobileNumber() {
-        assertEquals(true, "+601111111".validateMobileNumber(min = 8, max = 9))
+        assertEquals(true, "+601111111".isValidMobileNumber(min = 8, max = 9))
     }
 }

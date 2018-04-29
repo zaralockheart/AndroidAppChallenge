@@ -35,7 +35,7 @@ class SignUpActivity : BaseActivity(), SignUpview {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        signUpPresenter = SignUpPresenter(this)
+        signUpPresenter = SignUpPresenter(this, this)
     }
 
     fun onClickSignUp(view: View) {
@@ -76,22 +76,22 @@ class SignUpActivity : BaseActivity(), SignUpview {
     }
 
     override fun onEmptyCompulsoryField(error: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
     }
 
     override fun onInvalidMobileNumber(error: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        textInputLayoutMobileNumber.error = error
     }
 
     override fun onNoGenderSelected() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this@SignUpActivity, "Please select gender", Toast.LENGTH_LONG).show()
     }
 
     override fun onInvalidEmailFormat(error: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        textInputLayoutEmail.error = error
     }
 
     override fun onInvalidPasswordFormat(error: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        textInputLayoutPassword.error = error
     }
 }

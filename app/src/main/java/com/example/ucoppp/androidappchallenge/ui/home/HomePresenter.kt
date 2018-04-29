@@ -12,7 +12,7 @@ import com.example.ucoppp.androidappchallenge.database.user.UsersDatabase
 import com.example.ucoppp.androidappchallenge.ui.base.BasePresenter
 import com.example.ucoppp.androidappchallenge.ui.imagedisplayer.ImagesActivity
 import com.example.ucoppp.androidappchallenge.util.setUiMobileDialog
-import com.example.ucoppp.androidappchallenge.util.validateMobileNumber
+import com.example.ucoppp.androidappchallenge.util.isValidMobileNumber
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
@@ -28,7 +28,7 @@ class HomePresenter(private val homeView: HomeView, appCompatActivity: AppCompat
             setUiMobileDialog(it, "Change Mobile Number", view)
 
             it.setPositiveButton("Change", { mDialog, _ ->
-                if ("+6${mobileNumberEditText.text}".validateMobileNumber()) {
+                if ("+6${mobileNumberEditText.text}".isValidMobileNumber()) {
 
                     updateMobileNumber(userDao, userId, mobileNumberEditText)
 
