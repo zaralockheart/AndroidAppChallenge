@@ -10,11 +10,10 @@ import javax.inject.Singleton
 @Module
 class AppModule (private val appChallengeApplication: AndroidAppChallengeApplication){
 
-    @Provides
-    @Singleton
-    fun provideApplicationContext(): Context = appChallengeApplication
+    @Provides @Singleton fun provideApp() = appChallengeApplication
 
     @Provides
     @Singleton
-    fun provideSharedPreference(context: Context): SharedPreferences = context.getSharedPreferences(APPLICATION, Context.MODE_PRIVATE)
+    fun provideSharedPreference(context: Context): SharedPreferences =
+            context.getSharedPreferences(APPLICATION, Context.MODE_PRIVATE)
 }

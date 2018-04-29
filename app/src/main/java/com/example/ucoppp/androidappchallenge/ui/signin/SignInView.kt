@@ -1,6 +1,8 @@
 package com.example.ucoppp.androidappchallenge.ui.signin
 
-interface SignInView : EmailPasswordValidator {
+import com.example.ucoppp.androidappchallenge.ui.common.ClearDataView
+
+interface SignInView : EmailPasswordValidator, ClearDataView {
 
     fun onSignInUser()
 

@@ -11,7 +11,6 @@ import com.example.ucoppp.androidappchallenge.database.user.UserDao
 import com.example.ucoppp.androidappchallenge.database.user.UsersDatabase
 import com.example.ucoppp.androidappchallenge.ui.base.BasePresenter
 import com.example.ucoppp.androidappchallenge.ui.imagedisplayer.ImagesActivity
-import com.example.ucoppp.androidappchallenge.util.setUiMobileDialog
 import com.example.ucoppp.androidappchallenge.util.isValidMobileNumber
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -28,7 +27,7 @@ class HomePresenter(private val homeView: HomeView, appCompatActivity: AppCompat
             setUiMobileDialog(it, "Change Mobile Number", view)
 
             it.setPositiveButton("Change", { mDialog, _ ->
-                if ("+6${mobileNumberEditText.text}".isValidMobileNumber()) {
+                if (mobileNumberEditText.text.toString().isValidMobileNumber()) {
 
                     updateMobileNumber(userDao, userId, mobileNumberEditText)
 
@@ -43,18 +42,6 @@ class HomePresenter(private val homeView: HomeView, appCompatActivity: AppCompat
 
             it.show()
         }
-    }
-
-    private fun updateMobileNumber(userDao: UserDao, userId: String, mobileNumberEditText: EditText) {
-        Observable.fromCallable({
-            userDao.updateMobileNumber(userId, mobileNumberEditText.text.toString())
-        }).subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .subscribe({
-                    homeView.onUpdateMobileSuccess()
-                }, { _ ->
-                    homeView.onUpdateMobileFail(appCompatActivity.getString(R.string.text_change_mobile_fail))
-                })
     }
 
     fun onClickImages() {
@@ -73,5 +60,22 @@ class HomePresenter(private val homeView: HomeView, appCompatActivity: AppCompat
                     val user = db?.userDao()?.getUserByUuid(userId)
                     homeView.updateDataToi(user)
                 }
+    }
+
+    private fun updateMobileNumber(userDao: UserDao, userId: String, mobileNumberEditText: EditText) {
+        Observable.fromCallable({
+            userDao.updateMobileNumber(userId, mobileNumberEditText.text.toString())
+        }).subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe({
+                    homeView.onUpdateMobileSuccess()
+                }, { _ ->
+                    homeView.onUpdateMobileFail(appCompatActivity.getString(R.string.text_change_mobile_fail))
+                })
+    }
+
+    private fun setUiMobileDialog(dialog: AlertDialog.Builder, title: String, view: View) {
+        dialog.setTitle(title)
+        dialog.setView(view)
     }
 }

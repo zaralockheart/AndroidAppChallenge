@@ -8,7 +8,6 @@ import android.widget.Toast
 import com.example.ucoppp.androidappchallenge.R
 import com.example.ucoppp.androidappchallenge.database.user.User
 import com.example.ucoppp.androidappchallenge.ui.base.BaseActivity
-import com.example.ucoppp.androidappchallenge.util.runOnUi
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -24,11 +23,10 @@ class SignUpActivity : BaseActivity(), SignUpview {
 
     companion object {
 
-        fun newIntent(context: Context): Intent {
-            val intent = Intent(context, SignUpActivity::class.java)
+        // Nope, not passing anything here
 
-            return intent
-        }
+        fun newIntent(context: Context): Intent = Intent(context, SignUpActivity::class.java)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,14 +59,14 @@ class SignUpActivity : BaseActivity(), SignUpview {
         }).subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribe({
-                    runOnUi(this::signUp)
-                }, { _ -> runOnUi(this::signUpFail) })
+                    runOnUiThread(this::signUp)
+                }, { _ -> runOnUiThread(this::signUpFail) })
     }
 
     override fun onClearError() {
-        textInputLayoutEmail.error =""
-        textInputLayoutPassword.error =""
-        textInputLayoutMobileNumber.error =""
+        textInputLayoutEmail.error = ""
+        textInputLayoutPassword.error = ""
+        textInputLayoutMobileNumber.error = ""
     }
 
     override fun onEmptyCompulsoryField(error: String?) {

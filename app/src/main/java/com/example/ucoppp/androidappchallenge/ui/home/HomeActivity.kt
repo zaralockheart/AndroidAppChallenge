@@ -3,6 +3,7 @@ package com.example.ucoppp.androidappchallenge.ui.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -11,7 +12,6 @@ import com.example.ucoppp.androidappchallenge.database.user.User
 import com.example.ucoppp.androidappchallenge.ui.base.BaseActivity
 import com.example.ucoppp.androidappchallenge.util.APPLICATION
 import com.example.ucoppp.androidappchallenge.util.APP_SIGN_IN
-import com.example.ucoppp.androidappchallenge.util.runOnUi
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : BaseActivity(), HomeView {
@@ -63,13 +63,13 @@ class HomeActivity : BaseActivity(), HomeView {
     }
 
     override fun onUpdateMobileSuccess() {
-        runOnUi {
+        runOnUiThread {
             Toast.makeText(this, getString(R.string.text_change_mobile_success), Toast.LENGTH_LONG).show()
         }
     }
 
     override fun onUpdateMobileFail(text: String?) {
-        runOnUi {
+        runOnUiThread {
             Toast.makeText(this, text, Toast.LENGTH_LONG).show()
         }
     }
@@ -84,7 +84,9 @@ class HomeActivity : BaseActivity(), HomeView {
     }
 
     override fun updateDataToi(user: User?) {
-        runOnUi {
+
+        Log.e("fullname", "${user?.firstName} ${user?.lastName}")
+        runOnUiThread {
             textFirstName.text = user?.firstName
             textLastName.text = user?.lastName
             textMobileNumber.text = user?.mobileNumber

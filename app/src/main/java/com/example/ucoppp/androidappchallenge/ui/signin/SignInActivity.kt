@@ -8,7 +8,6 @@ import com.example.ucoppp.androidappchallenge.ui.base.BaseActivity
 import com.example.ucoppp.androidappchallenge.ui.home.HomeActivity
 import com.example.ucoppp.androidappchallenge.ui.signup.SignUpActivity
 import com.example.ucoppp.androidappchallenge.util.APP_SIGN_IN
-import com.example.ucoppp.androidappchallenge.util.runOnUi
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_sign_in.*
@@ -48,7 +47,7 @@ class SignInActivity : BaseActivity(), SignInView {
                 .subscribe { db: UsersDatabase? ->
                     val finalUser = db?.userDao()?.getUserByEmail(editTextEmail.text.toString())
 
-                    runOnUi {
+                    runOnUiThread {
 
                         if (finalUser?.password == editTextPassword.text.toString()) {
 
@@ -60,6 +59,11 @@ class SignInActivity : BaseActivity(), SignInView {
                         }
                     }
                 }
+    }
+
+    override fun onClearError() {
+        textInputLayoutEmail.error = ""
+        textInputLayoutPassword.error = ""
     }
 
     override fun onInvalidEmailFormat(error: String?) {
