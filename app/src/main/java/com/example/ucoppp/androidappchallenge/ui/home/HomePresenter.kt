@@ -24,15 +24,15 @@ class HomePresenter(private val homeView: HomeView, appCompatActivity: AppCompat
         val mobileNumberEditText = view.findViewById<EditText>(R.id.editTextMobileNumber)
         dialog.let {
 
-            setUiMobileDialog(it, "Change Mobile Number", view)
+            setUiMobileDialog(it, appCompatActivity.getString(R.string.text_change_mobile), view)
 
-            it.setPositiveButton("Change", { mDialog, _ ->
+            it.setPositiveButton(appCompatActivity.getString(R.string.text_change), { mDialog, _ ->
                 if (mobileNumberEditText.text.toString().isValidMobileNumber()) {
 
                     updateMobileNumber(userDao, userId, mobileNumberEditText)
 
                 } else {
-                    homeView.onUpdateMobileFail("Invalid Mobile Number")
+                    homeView.onUpdateMobileFail(appCompatActivity.getString(R.string.text_invalid_mobile))
                 }
 
                 loadData(userDatabase = userDatabase, userId = userId)

@@ -13,7 +13,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.item_edittext_email.*
 import kotlinx.android.synthetic.main.item_edittext_password.*
-import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
 class SignInActivity : BaseActivity(), SignInView {
@@ -90,11 +89,9 @@ class SignInActivity : BaseActivity(), SignInView {
 
     private fun setUpUiInteractions() {
         buttonSignIn.setOnClickListener {
-            launch {
-                signInPresenter.onUserLogin(
-                        email = editTextEmail.text.toString(),
-                        password = editTextPassword.text.toString())
-            }
+            signInPresenter.onUserLogin(
+                    email = editTextEmail.text.toString(),
+                    password = editTextPassword.text.toString())
         }
 
         buttonSignUp.setOnClickListener { startActivity(SignUpActivity.newIntent(this)) }
