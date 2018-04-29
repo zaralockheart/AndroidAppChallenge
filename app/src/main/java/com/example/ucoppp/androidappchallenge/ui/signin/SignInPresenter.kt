@@ -1,6 +1,7 @@
 package com.example.ucoppp.androidappchallenge.ui.signin
 
 import android.support.v7.app.AppCompatActivity
+import com.example.ucoppp.androidappchallenge.R
 import com.example.ucoppp.androidappchallenge.ui.base.BasePresenter
 import com.example.ucoppp.androidappchallenge.util.isValidEmail
 import com.example.ucoppp.androidappchallenge.util.isValidPassword
@@ -16,8 +17,8 @@ class SignInPresenter(private val signInView: SignInView, appCompatActivity: App
             var failed = false
             Observable.just(email)
                     .subscribe({ t ->
-                        if (t.isEmpty()) throw Exception("Email is empty")
-                        if (!t.isValidEmail()) throw Exception("Invalid Email")
+                        if (t.isEmpty()) throw Exception(appCompatActivity.getString(R.string.text_data_empty))
+                        if (!t.isValidEmail()) throw Exception(appCompatActivity.getString(R.string.text_invalid_email))
                     }, { error ->
                         signInView.onInvalidEmailFormat(error = error.localizedMessage)
                         failed= true
@@ -25,8 +26,8 @@ class SignInPresenter(private val signInView: SignInView, appCompatActivity: App
 
             Observable.just(password)
                     .subscribe({ t ->
-                        if (t.isEmpty()) throw Exception("Password is empty")
-                        if (!t.isValidPassword()) throw Exception("Invalid Password")
+                        if (t.isEmpty()) throw Exception(appCompatActivity.getString(R.string.text_data_empty))
+                        if (!t.isValidPassword()) throw Exception(appCompatActivity.getString(R.string.text_invalid_password))
                     }, { error ->
                         signInView.onInvalidPasswordFormat(error = error.localizedMessage)
                         failed= true

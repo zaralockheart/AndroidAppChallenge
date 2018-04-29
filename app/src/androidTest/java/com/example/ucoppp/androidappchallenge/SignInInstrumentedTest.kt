@@ -2,16 +2,15 @@ package com.example.ucoppp.androidappchallenge
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.*
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.RootMatchers.withDecorView
-import android.support.test.espresso.matcher.ViewMatchers.*
+import android.support.test.espresso.assertion.ViewAssertions
+import android.support.test.espresso.matcher.ViewMatchers
+import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.example.ucoppp.androidappchallenge.common.checkWithToast
 import com.example.ucoppp.androidappchallenge.ui.signin.SignInActivity
-import org.hamcrest.CoreMatchers.not
-import org.hamcrest.Matchers.`is`
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -43,6 +42,26 @@ class SignInInstrumentedTest {
     @Test
     fun testClickSignUp() {
         onView(withText(R.string.text_signup)).perform(click())
+    }
+
+    @Test
+    fun testEmptySomewhere() {
+        onView(withId(R.id.editTextEmail))
+                .perform(typeText("someemail@mailinator.com"), closeSoftKeyboard())
+
+        onView(withText(R.string.text_signin)).perform(click())
+
+        onView(ViewMatchers.withText(R.string.text_data_empty))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        onView(withId(R.id.editTextEmail))
+                .perform(typeText(""), closeSoftKeyboard())
+
+        onView(withId(R.id.editTextPassword))
+                .perform(typeText("somepass"), closeSoftKeyboard())
+
+        onView(ViewMatchers.withText(R.string.text_data_empty))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     @Test

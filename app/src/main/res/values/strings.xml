@@ -14,9 +14,9 @@
     <string name="text_change_mobile">Change Mobile Number</string>
     <string name="text_change_mobile_fail">Failed to change Mobile Number</string>
     <string name="text_change_mobile_success">Success change Mobile Number</string>
-    <string name="text_data_empty">Please fill in all the data</string>
-    <string name="text_invalid_email">Invalid email</string>
-    <string name="text_invalid_password">Invalid password</string>
+    <string name="text_data_empty">All fields are required</string>
+    <string name="text_invalid_email">Email is not valid</string>
+    <string name="text_invalid_password">Password should contain one special character and a minimum 8 characters required</string>
     <string name="text_invalid_mobile">Invalid mobile number</string>
     <string name="text_fail_signin">Not sign in</string>
     <string-array name="gender">
